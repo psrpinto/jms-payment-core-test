@@ -1,0 +1,4 @@
+jms_payment_paypal:
+  username: your api username
+  password: your api password
+  signature: your api signature
