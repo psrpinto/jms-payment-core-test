@@ -71,9 +71,9 @@ class OrdersController extends AbstractController
             $em->persist($order);
             $em->flush($order);
 
-            return $this->redirect($this->generateUrl('app_orders_paymentcreate', [
+            return $this->redirectToRoute('app_orders_paymentcreate', [
                 'orderId' => $order->getId(),
-            ]));
+            ]);
         }
 
         return $this->render('Orders/show.html.twig', [
@@ -94,9 +94,9 @@ class OrdersController extends AbstractController
         $result = $ppc->approveAndDeposit($payment->getId(), $payment->getTargetAmount());
 
         if ($result->getStatus() === Result::STATUS_SUCCESS) {
-            return $this->redirect($this->generateUrl('app_orders_paymentcomplete', [
-                'id' => $order->getId(),
-            ]));
+            return $this->redirectToRoute('app_orders_paymentcomplete', [
+                'orderId' => $order->getId(),
+            ]);
         }
 
         throw $result->getPluginException();
